@@ -21,6 +21,7 @@
 
 ## 設計書
 [テーブル定義書](https://docs.google.com/spreadsheets/d/11_IwxVkBpOYcGnj7wn1w48xc53spV66qVGL3khm2BeE/edit?usp=sharing)
+[ER図](https://docs.google.com/spreadsheets/d/1eWlE-D2QtnpwAbs1cKq6Fhpbl9yNv5L5ORWH_43rLRo/edit?usp=sharing)
 
 ## チャレンジ要素一覧
 https://docs.google.com/spreadsheets/d/1qYILQxQnkE-OY1susFgR7SC5z_qVBturbkJqrBe5NoI/edit#gid=1919333492
