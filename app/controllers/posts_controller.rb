@@ -13,7 +13,8 @@ class PostsController < ApplicationController
 
 
   def index
-    @posts = Post.all
+    # kaminari機能でページ指定をしつつ一覧取得
+    @posts = Post.page(params[:page]).reverse_order
   end
 
   def show

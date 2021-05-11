@@ -9,4 +9,4 @@
 #管理者のメールアドレスとパスワードを事前に追加(URLは直接入力)
 Admin.create!(email: 'admin@test.com', password: 'testtest',)
 
-User.create!(name: 'tarou', email: 'a@a', password: 'testest')
+User.create!(name: 'tarou', email: 'a@a', password: 'testtest')
