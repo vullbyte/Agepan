@@ -61,8 +61,15 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# 新規追加 デプロイ第1章
+# 新規追加 デプロイ第1章参照
 gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
+
+# rename用
+gem 'rename'
+
+gem 'devise'
+gem "refile", require: "refile/rails", github: 'manfe/refile'
+gem "refile-mini_magick"
