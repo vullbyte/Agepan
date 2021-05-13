@@ -1,0 +1,67 @@
+<h2>Results index</h2>
+<!--posts一覧 -->
+<table class="table table-hover table-inverse">
+　<% if @range == '2' %>
+  <thead>
+    <tr>
+     <th></th>
+     <th>Title</th>
+     <th>Opinion</th>
+     <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+     <% @post.each do |post| %>
+     <tr>
+      <td>
+       <%= link_to(post.user) do %>
+       <%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg") %>
+       <% end %>
+      </td>
+      <td>
+        <%= link_to(post.user) do %>
+          <%= post.user.name %>
+        <% end %>
+      </td>
+      <!--<td>-->
+       <!--<= link_to post.title, post, class: "post_#{post.id}" %> -->
+      <!--</td>-->
+      <td><%= post.body %></td>
+      <td>
+        <p>コメント件数：<%= post.post_comments.count %></p>
+        <% post.post_comments.each do |post_comment| %>
+          <%= post_comment.user.name %>
+          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
+          <%= post_comment.comment %>
+          <% if post_comment.user == current_user %>
+            <div class="comment-delete">
+              <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+            </div>
+          <% end %>
+        <% end %>
+      </td>
+     </tr>
+     <% end %>
+  </tbody>
+
+  <% else %>
+  <thead>
+     <tr>
+      <th>image</th>
+      <th>name</th>
+      <th colspan="3"></th>
+     </tr>
+   </thead>
+
+   <tbody>
+    <% @user.each do |user| %>
+     <tr>
+      <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg") %></td>
+      <td><%= user.name%></td>
+      <td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
+     </tr>
+    <% end %>
+   </tbody>
+   <% end %>
+ </table>
