@@ -1,1 +1,6 @@
-<%= button_to 'フォロー', relationships_path(follower: user), remote: true %>
+<!--<= button_to 'フォロー', relationships_path(follower: user), remote: true %>-->
+
+<%= form_for(current_user, url: relationships_path(follower: user), method: :post, remote: true) do |f| %>
+  <%= hidden_field_tag :following_id, user.id %>
+  <%= f.submit "フォローする", class: "btn btn-outline-secondary" %>
+<% end %>
