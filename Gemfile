@@ -78,3 +78,5 @@ gem 'kaminari','~> 1.2.1'
 # AJAX処理用
 gem 'jquery-rails'
 
+gem 'bootstrap', '~> 4.5'
+gem 'font-awesome-sass', '~> 5.13'
