@@ -1,0 +1,2 @@
+$("#comments_area").html("<%= j(render 'index', { comments: @post_comment.post.comments }) %>")
+$("textarea").val('')

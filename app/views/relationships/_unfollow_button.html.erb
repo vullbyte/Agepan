@@ -1,0 +1,5 @@
+<!--<= button_to 'フォロー解除', relationship_path(current_user.relationships.find_by(follower: user)), method: :delete, remote: true %>-->
+
+<%= form_for(current_user, url: relationship_path(current_user.relationships.find_by(follower: user)), method: :delete, remote: true) do |f| %>
+  <%= f.submit "フォロー解除", class: "btn btn-outline-secondary" %>
+<% end %>

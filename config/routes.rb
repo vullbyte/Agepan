@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     registrations: 'admins/registrations'
   }
   resources :admins
+  resources :relationships, only: [:create, :destroy]
 
   devise_for :users, controllers: {
     sessions:      'users/sessions',
