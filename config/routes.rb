@@ -7,18 +7,24 @@ Rails.application.routes.draw do
   resources :admins
   resources :relationships, only: [:create, :destroy]
 
+
   devise_for :users, controllers: {
     sessions:      'users/sessions',
     passwords:     'users/passwords',
     registrations: 'users/registrations'
   }
-  resources :users
+
+  # マイページのルーティングにネスト
+  resources :users do
+    get :favorites, on: :collection
+  end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'search' => 'searches#search'
   root to: 'homes#top'
   resources :posts, only: [:new, :create, :index, :show, :destroy] do
-    resource :favorites, only: [:create, :destroy]
+    resource :favorites, only: [:create, :destroy] # 記事詳細表示のルーティングにネスト
     resources :post_comments, only: [:create, :destroy]
   end
 end
