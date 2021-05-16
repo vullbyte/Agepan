@@ -17,11 +17,24 @@
   <% end %>
   
 
-<div>
-<% if @favorite_list.present? %>
-  <%= @favorite_list.each do |post| %>
-    <%= post.title %>
-    <%= post.content %>
-  <% end %>
-<% end %>
-</div>
+<table>
+    <caption>ブックマーク一覧</caption>
+    <thead>
+        <tr>
+            <th>投稿者名</th>
+            <th>本文</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @favorites.each do |bookmark| %>
+            <tr>
+                <td>
+                    <%= link_to post_path(bookmark.post) do %>
+                      <%= bookmark.post.user.name %>
+                    <% end %>
+                </td>
+                <td><%= bookmark.post.body %></td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
