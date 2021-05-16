@@ -15,23 +15,28 @@ class PostsController < ApplicationController
   def index
     # kaminari機能でページ指定をしつつ一覧取得
     @posts = Post.page(params[:page]).reverse_order
+    if params[:tag_name]
+      @posts = Post.tagged_with("#{params[:tag_name]}")
+    end
   end
 
   def show
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
     @post_comments = @post.post_comments.all
+    @user = User.find(@post.user_id)
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to post_path
+    redirect_to posts_path
   end
 
   private
 
   def post_params
-    params.require(:post).permit(:body, :image)
+    params.require(:post).permit(:body, :image, :tag_list)
   end
+
 end

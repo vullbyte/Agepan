@@ -14,3 +14,25 @@
  *= require_self
  */
 @import "bootstrap";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header, nav {
+  font-family: Chalkduster, "Bradley Hand", Courier, "Segoe Print", sans-serif;
+}
+
+.gnav {
+  // flex-direction: column;
+}
+.form-janre{
+  margin-top: 10px;
+}
+
+#show-body{
+  // margin: 0 auto;
+  // align-items: center;
+}
