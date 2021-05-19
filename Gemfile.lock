@@ -1,12 +1,4 @@
 GIT
-  remote: https://github.com/Fodoj/acts-as-taggable-on.git
-  revision: ef3797a848bd76a5290d209ff856e55a9f9053c5
-  branch: rails-5.2
-  specs:
-    acts-as-taggable-on (5.0.0)
-      activerecord (~> 5.0)
-
-GIT
   remote: https://github.com/manfe/refile.git
   revision: 46b4178654e60bb5846b1423acf6d0740cdecc25
   specs:
@@ -59,6 +51,8 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts-as-taggable-on (6.5.0)
+      activerecord (>= 5.0, < 6.1)
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     archive-zip (0.12.0)
@@ -307,7 +301,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts-as-taggable-on!
+  acts-as-taggable-on (~> 6.0)
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.5)
   byebug
@@ -322,6 +316,7 @@ DEPENDENCIES
   jquery-rails
   kaminari (~> 1.2.1)
   listen (>= 3.0.5, < 3.2)
+  mini_magick
   mysql2
   puma (~> 3.11)
   rails (~> 5.2.5)

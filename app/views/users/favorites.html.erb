@@ -1,0 +1,29 @@
+<div class="container">
+
+  <h3>いいねした投稿一覧！！</h3>
+
+  <div class="row">
+    
+    <% @favorites.each do |favorite| %>
+      <!--　投稿とユーザーの情報取得  -->
+      <% post = Post.find_by(id: favorite.post_id) %>
+      <% user = User.find_by(id: post.user_id) %>
+
+      <!-- 投稿の表示 -->
+      <table>
+        <thead>
+          <th>投稿</th>
+          <th>ユーザー</th>
+        </thead>
+        <tbody>
+          <tr>
+
+            <!--<td><= link_to(post.body, "/posts/#{post.id}"), class: "post_body" %></td>-->
+            <td><%= link_to post.body, "/posts/#{post.id}", class: "post_body" %></td>
+            <td><%= link_to( user.name, "/users/#{user.id}", class: "post_name"  ) %></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>    
+  </div>
+</div>

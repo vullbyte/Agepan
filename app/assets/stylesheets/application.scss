@@ -36,3 +36,16 @@ header, nav {
   // margin: 0 auto;
   // align-items: center;
 }
+
+// ブックマークした投稿一覧からの投稿本文(body)とユーザーページ(name)へのCSS
+.post_body{
+    text-decoration: none;
+    // color: #38aef0 ;
+    color: #000 ;
+}
+.post_name{
+    text-decoration: none;
+    // color: #38aef0 ;
+    color: #000 ;
+    margin-left: 10px;
+}

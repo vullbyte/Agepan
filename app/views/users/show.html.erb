@@ -1,40 +1,79 @@
-<h1>Users#show</h1>
-<!--< if logged_in? && current_user != user %>-->
-<% if user_signed_in? &&  current_user != @user %>
-  <div id="follow_form-<%= @user.id %>" >
-    <% if current_user.following?(@user) %>
-      <%= render 'relationships/unfollow_button', user: @user %>
-    <% else %>
-      <%= render 'relationships/follow_button', user: @user %>
-    <% end %>
-  </div>
-<% end %>
-<p>名前 : <%= @user.name %></p>
-<p>メールアドレス : <%= @user.email %></p>
-<p>プロフィール : <%= @user.profile %></p>
-  <% if @user.id == current_user.id %>
-    <p><%= link_to "プロフィール編集", edit_user_path(@user) %></p>
-  <% end %>
-  
+<div class="container">
+<div class="row">
 
-<table>
-    <caption>ブックマーク一覧</caption>
-    <thead>
-        <tr>
-            <th>投稿者名</th>
-            <th>本文</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% @favorites.each do |bookmark| %>
-            <tr>
-                <td>
-                    <%= link_to post_path(bookmark.post) do %>
-                      <%= bookmark.post.user.name %>
-                    <% end %>
-                </td>
-                <td><%= bookmark.post.body %></td>
-            </tr>
+<div class="col-5">
+  <div class="sidebar">
+    <%= render partial: 'users/user_sidebar', locals: { user: @my_user, favorites: @myfavorites,  } %>
+  </div>
+</div>
+
+<div class="col-7">
+  <!-- ユーザーが自分だったらユーザー情報無しで投稿だけ表示させる -->
+  <% if @user.id == @my_user.id %>
+      <h4 style="margin-top: 20px;">あなたの投稿一覧</h4>
+      <% @posts.each do |post| %>
+        <!--  <= attachment_image_tag post, :images %>-->
+          <% post.image.each do |post| %>
+            <%= image_tag post.to_s %>-
+              <!--<= image_tag (post.url) %>-->
+          <% end %>
+
+      
+          <!--<p>投稿ユーザー画像：<= image_tag('yamaarashi_dilemma.jpg') %></p>-->
+        <p><%= post.body %></p>
+        <%= link_to post_path(post) do %>
+          <p>ユーザーネーム：<%= post.user.name %></p>
         <% end %>
-    </tbody>
-</table>
+        <p><%= post.created_at.strftime('%Y/%m/%d') %></p>
+        <p>タグ一覧： <%= render 'posts/tag_list', tag_list: post.tag_list %></p>
+      <% end %>
+  <% else %>
+      <h2><%= @user.name %>さんのページ</h2>
+      <p>名前 : <%= @user.name %></p>
+      <p>メールアドレス : <%= @user.email %></p>
+      <p>プロフィール : <%= @user.profile %></p>
+
+      <!--< if logged_in? && current_user != user %>-->
+      <% if user_signed_in? &&  @my_user != @user %>
+        <div id="follow_form-<%= @user.id %>" >
+          <% if @my_user.following?(@user) %>
+            <%= render 'relationships/unfollow_button', user: @user %>
+          <% else %>
+            <%= render 'relationships/follow_button', user: @user %>
+          <% end %>
+        </div>
+      <% end %>
+
+      <%= link_to  user_favorites_path(@user) do %>
+        <%= @user.name %>さんがいいねした投稿一覧
+      <% end %>
+      
+      <!-- 見ているユーザーの投稿一覧 -->
+      <h4 style="margin-top: 20px;">投稿一覧</h4>
+      <% @posts.each do |post| %>
+        <!--  <= attachment_image_tag post, :images %>-->
+          <% post.image.each do |post| %>
+            <%= image_tag post.to_s %>-
+              <!--<= image_tag (post.url) %>-->
+          <% end %>
+      
+          <!--<p>投稿ユーザー画像：<= image_tag('yamaarashi_dilemma.jpg') %></p>-->
+        <p><%= post.body %></p>
+        <%= link_to post_path(post) do %>
+          <p>ユーザーネーム：<%= post.user.name %></p>
+        <% end %>
+        <p><%= post.created_at.strftime('%Y/%m/%d') %></p>
+        <p>タグ一覧： <%= render 'posts/tag_list', tag_list: post.tag_list %></p>
+        <p>コメント数: <%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
+        <div id="favorite_<%= post.id %>">
+          <%= render partial: 'favorites/favorite', locals: { post: post } %>
+        </div>
+      <% end %>
+  <% end %>
+    <!--  ユーザーの投稿一覧    -->
+</div>
+
+<!-- container と row のdiv-->
+</div>
+</div>
+<!---------------------------->

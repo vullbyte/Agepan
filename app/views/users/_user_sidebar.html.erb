@@ -1,0 +1,16 @@
+<h2>my profile</h2>
+  <p>名前 : <%= user.name %></p>
+    <p>メールアドレス : <%= user.email %></p>
+    <p>プロフィール : <%= user.profile %></p>
+    
+    <% if user.id == current_user.id %>
+      <p><%= link_to "プロフィール編集", edit_user_path(user) %></p>
+    <% end %>
+
+    <% if favorites.present? %>
+      <% favorites.each do |favorite| %>
+        <%= link_to user_favorites_path(user) do %>
+          <p>ブックマーク投稿一覧</p>
+        <% end %>
+      <% end %>
+    <% end %>

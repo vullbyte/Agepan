@@ -82,7 +82,9 @@ gem 'bootstrap', '~> 4.5'
 gem 'font-awesome-sass', '~> 5.13'
 
 # タグ検索
-gem 'acts-as-taggable-on', github: 'Fodoj/acts-as-taggable-on', branch: 'rails-5.2'
+gem 'acts-as-taggable-on', '~> 6.0'
 
 # 画像アップロード
 gem 'carrierwave'
+gem 'mini_magick'
+
