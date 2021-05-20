@@ -1,12 +1,4 @@
-<% if @post.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <ul>
-      <% @post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render 'layouts/error_messages', model: @post %>
 
 <h1>投稿フォーム</h1>
 <%= form_with model: @post, local:true do |f| %>

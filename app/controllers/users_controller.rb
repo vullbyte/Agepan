@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    # userのサイドバー表示用(myuser, myfavorites)
+    # 自分のサイドバー表示のため、見たいユーザーとは別に変数を用意(myuser, myfavorites)
     @myuser = current_user.id
     @my_user = User.find(@myuser)
     @myfavorites = Favorite.where(user_id: @my_user)
@@ -13,8 +13,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @posts = @user.posts
 
-    # favorites = Favorite.where(user_id: current_user.id).pluck(:post_id)  # ログイン中のユーザーのお気に入りのpost_idカラムを取得
-    # @favorite_list = Post.find(favorites)     # postsテーブルから、お気に入り登録済みのレコードを取得
     @favorites = Favorite.where(user_id: @user)
 
   end
@@ -32,6 +30,23 @@ class UsersController < ApplicationController
   def favorites
     @user = User.find(params[:user_id])
     @favorites = Favorite.where(user_id: @user)
+  end
+  
+  # 退会画面
+  def withdrawal
+    @user = User.find(params[:id])
+    # is_deletedカラムをtrueに変更することにより削除フラグを立てる
+    @user.update(is_deleted: true)
+    reset_session
+    flash[:notice] = "退会処理を実行いたしました"
+    redirect_to root_path
+  end
+
+  # 管理者からは物理的に排除(よほどのことがない限り排除は)
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    redirect_to root_path
   end
 
 

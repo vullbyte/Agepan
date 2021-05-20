@@ -1,0 +1,32 @@
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class ="collapse navbar-collapse">
+    <ul class ="navbar-nav　navbar-expand-lg", id="nav">
+      <% if user_signed_in? %>
+        <!--<div class="btn-group" role="group" aria-label="Basic example">-->
+          <!--<button type="button" class="btn btn-light mx-2 "><= link_to '新規投稿', new_post_path %></button>-->
+          <!--<button type="button" class="btn btn-light mx-2 "><= link_to '投稿一覧', posts_path %></button>-->
+          <!--<button type="button" class="btn btn-light mx-2 "><= link_to 'マイページ', user_path(current_user.id) %></button>-->
+          <!--<button type="button" class="btn btn-light mx-2 "><= link_to 'ユーザー一覧', users_path %></button>-->
+          <!--<button type="button" class="btn btn-light mx-2 "><= link_to "ログアウト", destroy_user_session_path, method: :delete %></button>-->
+          <!--<button type="button" class="btn btn-light mx-2 "><= link_to 'お問い合わせ', new_contact_path %></button>-->
+        <!--</div>-->
+          <li><%= link_to '新規投稿', new_post_path %></li>
+          <li><%= link_to '投稿一覧', posts_path %></li>
+          <li><%= link_to 'マイページ', user_path(current_user.id) %></li>
+          <li><%= link_to 'ユーザー一覧', users_path %></li>
+          <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+          <li><%= link_to 'お問い合わせ', new_contact_path %></li>
+      <% elsif admin_signed_in? %>
+          <li><%= link_to '投稿一覧', admin_posts_path %></li>
+          <li><%= link_to 'ユーザー一覧', admin_users_path %></li>
+          <li><%= link_to "ログアウト", destroy_admin_session_path, method: :delete %></li>
+      <% else %>
+          <li><%= link_to "新規登録", new_user_registration_path %></li>
+          <li><%= link_to "ログイン", new_user_session_path %></li>
+          <li><%= link_to 'お問い合わせ', new_contact_path %></li>
+      <% end %>
+    </ul>
+  </div>

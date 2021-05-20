@@ -21,8 +21,34 @@
   box-sizing: border-box;
 }
 
-header, nav {
+// -----ナビゲーションバー部分------
+#nav {
+  list-style: none;
+  overflow: hidden;
+}
+#nav li {
+  width: 100px;
+  text-align: center;
+  background-color: #CC9966;
+  float: left;
+  margin-top: 10px;
+}
+#nav li a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+//  -----ナビゲーションバーここまで-----
+
+header, nav, body {
   font-family: Chalkduster, "Bradley Hand", Courier, "Segoe Print", sans-serif;
+}
+header {
+  background-color: #CC9966;
+}
+
+.logo {
+  display: inline-block;
 }
 
 .gnav {
