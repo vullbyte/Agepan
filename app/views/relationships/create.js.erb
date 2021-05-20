@@ -1,0 +1,3 @@
+<!--$("#follow-button-<= @other_user.id %>").html("<= j(render 'unfollow_button', user: @other_user) %>")-->
+
+$("#follow_form-<%= @other_user.id %>").html("<%= j(render 'unfollow_button', user: @other_user) %>");

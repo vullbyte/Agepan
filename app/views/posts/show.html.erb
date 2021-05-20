@@ -1,0 +1,56 @@
+<div class="container">
+  <div class="row">
+
+  <div class="col-5" >
+    <div class="sidebar">
+      <%= render partial: 'users/user_sidebar', locals: { user: @my_user, favorites: @myfavorites,  } %>
+    </div>
+  </div>
+
+  <div class="col-7">
+    <h2>投稿詳細</h2>
+      <div>
+        <!--<= attachment_image_tag @post, :image, format: 'jpeg', size: "200x200",  fallback: "pastel_00011.jpg" %>-->
+      <% @post.image.each do |img| %>
+        <%= image_tag img.url %>
+      <% end %>
+      </div>
+
+
+    <div class="row">
+      <div id="show-body">
+            <p><%= @post.body %></p>
+      </div>
+    </div>
+    <div class="row">
+      <p>ユーザーネーム：<%= @post.user.name %></p>
+      <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
+    </div>
+
+    <div id="favorite_<%= @post.id %>">
+      <%= render partial: 'favorites/favorite', locals: { post: @post } %>
+    </div>
+
+      <% if @post.user == current_user %>
+        <%= link_to "投稿削除", post_path(@post), method: :delete, data: {confirm: "本当に消しますか？"}%>
+      <% end %>
+
+      <p><%= render 'posts/tag_list', tag_list: @post.tag_list %></p>
+
+      <div class="row">
+        <div id="comments_area">
+          <% if user_signed_in? %>
+          <div style="margin: 0 10px;">
+            <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
+            <%= render partial: 'post_comments/form', locals: { post_comment: @post_comment, post: @post } %>
+          </div>
+          <% end %>
+
+
+          <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
+          <%= render partial: 'post_comments/index', locals: { post_comments: @post_comments } %>
+        </div>
+      </div>
+  </div>
+
+</div>

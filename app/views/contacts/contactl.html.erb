@@ -1,0 +1,10 @@
+<p>お問い合わせページ</p>
+
+<%= form_with model: @contact do |f| %>
+    <%= f.label :お名前　%><br>
+    <%= f.text_field :name %><br>
+    <%= f.label :お問い合わせ　%><br>
+    <%= f.text_field :message %><br>
+  <%= f.submit '送信' %>
+<% end %>
+  

@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+
+  <div class="col-5" >
+    <div class="sidebar">
+      <%= render partial: 'users/user_sidebar', locals: { user: @my_user, favorites: @myfavorites,  } %>
+    </div>
+  </div>
+
+  <div class="col-7">
+    <% @posts.each do |post| %>
+    <div>
+        <!--<= attachment_image_tag post, :image %>-->
+      <% post.image.each do |img| %>
+        <%= image_tag img.url %>
+      <% end %>
+
+        <!--<p>投稿ユーザー画像：<= image_tag('yamaarashi_dilemma.jpg') %></p>-->
+      <p><%= post.body %></p>
+      <%= link_to post_path(post) do %>
+        <p>ユーザーネーム：<%= post.user.name %></p>
+      <% end %>
+      <p><%= post.created_at.strftime('%Y/%m/%d') %></p>
+      <p><%= render 'posts/tag_list', tag_list: post.tag_list %></p>
+      <p><%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
+      <div id="favorite_<%= post.id %>">
+        <%= render partial: 'favorites/favorite', locals: { post: post } %>
+      </div>
+    </div>
+    <% end %>
+    <!--<= paginate @posts %>-->
+  </div>
+
+</div>
+</div>
