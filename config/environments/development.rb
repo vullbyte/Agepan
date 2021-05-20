@@ -58,7 +58,26 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-  
+
   # Cannot render console fromのエラーが出たので
   config.web_console.whitelisted_ips = '114.161.176.249'
+
+  # 開発環境ではproduct.rbの方に記述する
+  config.action_mailer.perform_deliveries = true # メール送信を有効にする
+  config.action_mailer.raise_delivery_errors = true # メール送信ができなかった場合、エラーを発生させる
+  config.action_mailer.delivery_method = :smtp # メール送信する際に通信プロトコルSMTPを利用する
+  config.action_mailer.smtp_settings = {
+    address:              'smtp.gmail.com',
+    port:                  587,
+    domain:               'gmail.com',
+  #-----変更点---------------------------
+    # user_name:            'vulsry3125@gmail.com',
+    user_name:            ENV['GMAIL_ADDRESS'],
+    # password:             'mxkpvanygjndhtnv',
+    password:             ENV['GMAIL_PASS'],
+  #----変更点ここまで-----------------------
+    authentication:       'plain',
+    enable_starttls_auto:  true
+  }
+
 end
