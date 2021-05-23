@@ -1,39 +1,56 @@
 <div class="container">
 <div class="row">
 
-<div class="col-5">
+<div class="col-sm-1"></div>
+<div class="col-sm-2">
   <div class="sidebar">
     <%= render partial: 'users/user_sidebar', locals: { user: @my_user, favorites: @myfavorites,  } %>
   </div>
 </div>
 
-<div class="col-7">
+<div class="col-sm-8 offset-sm-1">
   <!-- ユーザーが自分だったらユーザー情報無しで投稿だけ表示させる -->
   <% if @user.id == @my_user.id %>
-      <h4 style="margin-top: 20px;">あなたの投稿一覧</h4>
-      <% @posts.each do |post| %>
-        <!--  <= attachment_image_tag post, :images %>-->
-          <% post.image.each do |post| %>
-            <%= image_tag post.to_s %>-
-              <!--<= image_tag (post.url) %>-->
-          <% end %>
+      <h2 class="title text-left">Your Post</h2>
 
-      
-          <!--<p>投稿ユーザー画像：<= image_tag('yamaarashi_dilemma.jpg') %></p>-->
-        <p><%= post.body %></p>
-        <%= link_to post_path(post) do %>
-          <p>ユーザーネーム：<%= post.user.name %></p>
-        <% end %>
-        <p><%= post.created_at.strftime('%Y/%m/%d') %></p>
-        <p>タグ一覧： <%= render 'posts/tag_list', tag_list: post.tag_list %></p>
+      <% @posts.each do |post| %>    
+      <div class="posted">
+        <div class="posted-user">
+          <%= attachment_image_tag post.user.profile_image , :profile_image, format: 'jpeg', size: "30x30", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+          <%= link_to post_path(post) do %>
+            <%= post.user.name %>
+          <% end %>
+        </div>
+        <div class="posted-body">
+          <p class="mt-2 pl-sm-3"><%= post.body %></p>
+          <% post.image.each do |img| %>
+            <%= image_tag img.url ,class: 'sized' %>
+          <% end %>
+        </div>
+        <div class="row" id="posted-info">
+          <div class="col-sm-2">
+            <p class="pl-sm-3"><%= post.created_at.strftime('%Y/%m/%d') %></p>
+          </div>
+          <div class="col-sm-2", id="favorite_<%= post.id %>">
+            <%= render partial: 'favorites/favorite', locals: { post: post } %>
+          </div>
+          <div class="col-sm-2">
+            <%= "コメント(#{post.post_comments.count})" %></p>
+          </div>
+          <div class="col-sm-6">
+            <p>タグ：<%= render 'posts/tag_list', tag_list: post.tag_list %></p>
+          </div>
+        </div>
+      </div>
       <% end %>
+      
   <% else %>
       <h2><%= @user.name %>さんのページ</h2>
+      <%= attachment_image_tag @user.profile_image , :profile_image, format: 'jpeg', size: "100x100", fallback: "no_image.jpg", class:"mt-sm-2 mb-sm-2" %>
       <p>名前 : <%= @user.name %></p>
       <p>メールアドレス : <%= @user.email %></p>
       <p>プロフィール : <%= @user.profile %></p>
 
-      <!--< if logged_in? && current_user != user %>-->
       <% if user_signed_in? &&  @my_user != @user %>
         <div id="follow_form-<%= @user.id %>" >
           <% if @my_user.following?(@user) %>
@@ -45,35 +62,48 @@
       <% end %>
 
       <%= link_to  user_favorites_path(@user) do %>
-        <%= @user.name %>さんがいいねした投稿一覧
+        <p class="mt-sm-3"><%= @user.name %>さんがいいねした投稿一覧</p>
       <% end %>
       
       <!-- 見ているユーザーの投稿一覧 -->
       <h4 style="margin-top: 20px;">投稿一覧</h4>
-      <% @posts.each do |post| %>
-        <!--  <= attachment_image_tag post, :images %>-->
-          <% post.image.each do |post| %>
-            <%= image_tag post.to_s %>-
-              <!--<= image_tag (post.url) %>-->
-          <% end %>
-      
-          <!--<p>投稿ユーザー画像：<= image_tag('yamaarashi_dilemma.jpg') %></p>-->
-        <p><%= post.body %></p>
-        <%= link_to post_path(post) do %>
-          <p>ユーザーネーム：<%= post.user.name %></p>
-        <% end %>
-        <p><%= post.created_at.strftime('%Y/%m/%d') %></p>
-        <p>タグ一覧： <%= render 'posts/tag_list', tag_list: post.tag_list %></p>
-        <p>コメント数: <%= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>
-        <div id="favorite_<%= post.id %>">
-          <%= render partial: 'favorites/favorite', locals: { post: post } %>
+      <% @posts.each do |post| %>    
+        <div class="posted">
+          <div class="posted-user">
+            <%= attachment_image_tag post.user.profile_image , :profile_image, format: 'jpeg', size: "30x30", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+            <%= link_to post_path(post) do %>
+              <%= post.user.name %>
+            <% end %>
+          </div>
+          <div class="posted-body">
+            <p class="mt-2 pl-sm-3"><%= post.body %></p>
+            <% post.image.each do |img| %>
+              <%= image_tag img.url ,class: 'sized' %>
+            <% end %>
+          </div>
+          <div class="row" id="posted-info">
+            <div class="col-sm-2">
+              <p class="pl-sm-3"><%= post.created_at.strftime('%Y/%m/%d') %></p>
+            </div>
+            <div class="col-sm-2", id="favorite_<%= post.id %>">
+              <%= render partial: 'favorites/favorite', locals: { post: post } %>
+            </div>
+            <div class="col-sm-2">
+              <%= "コメント(#{post.post_comments.count})" %></p>
+            </div>
+            <div class="col-sm-6">
+              <p>タグ：<%= render 'posts/tag_list', tag_list: post.tag_list %></p>
+            </div>
+          </div>
         </div>
       <% end %>
-  <% end %>
-    <!--  ユーザーの投稿一覧    -->
+      <!--<= paginate @posts %>-->
+    <% end %>
+    
 </div>
 
 <!-- container と row のdiv-->
 </div>
 </div>
 <!---------------------------->
+

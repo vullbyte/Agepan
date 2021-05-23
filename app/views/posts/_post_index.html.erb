@@ -1,16 +1,4 @@
-<div class="container">
-  <div class="row">
-
-  <div class="col-sm-1"></div>
-  <div class="col-sm-2">
-    <div class="sidebar">
-      <%= render partial: 'users/user_sidebar', locals: { user: @my_user, favorites: @myfavorites,  } %>
-    </div>
-  </div>
-  
-  <div class="col-sm-8 offset-sm-1">
-    <h2>Timeline</h2>
-    <% @posts.each do |post| %>    
+  <% post.each do |post| %>    
 
     <div class="posted">
       <div class="posted-user">
@@ -42,8 +30,4 @@
       </div>
     </div>
     <% end %>
-    <%= paginate @posts %>
-  </div>
-
-</div>
-</div>
+  

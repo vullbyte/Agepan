@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   # ログイン済ユーザーのみにアクセスを許可する
+  # 権限関連悩み中です
   # before_action :authenticate_user!
 
   # deviseコントローラーにストロングパラメータを追加する
@@ -8,10 +9,14 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
     when Admin
-      root_path          #pathは設定したい遷移先へのpathを指定してください
+      root_path
     when User
-      root_path              #ここもpathはご自由に変更してください
+      user_path(resource)
     end
+  end
+
+  def after_sign_out_path_for(resource)
+    new_user_session_path # ログアウト後に遷移するpathを設定
   end
 
 

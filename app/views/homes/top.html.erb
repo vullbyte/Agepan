@@ -1,16 +1,22 @@
 <div class="container">
   <div class="row">
+      <div class="content">
+        <div class="bg"></div>
+        <p class="welcome">Welcome to Agepan !</p>
+      </div>
     <div class="col-2"></div>
-    <div class="col-8">
-      <h1 class="text-center">Welcome to Agepan !</h1>
-
-      <p>このサイトでは互いに幸せを共有しましょう！</p>
-      <p>他人を不快にするような発言や画像の投稿は控えましょう</p>
-      <p>ログインは<%= link_to "こちら", new_user_session_path %></p>
-      <p>アカウント作成は<%= link_to "こちら", new_user_registration_path %></p>
-
-      <p>なにかありましたら運営へ<%= link_to "お問い合わせ", new_contact_path %>をお願いいたします。</p>
-
+    
+    <div class="col-8", id="introduction">
+      <div id="introduction-text">
+        <p>あなたの気分をほっこり上げる、<span style="color: #FF570D">ゆるくつながるSNS</span>です</p>
+        <p>お互いに幸せに思えた出来事を共有しましょう（ペットやニュース、なんでもありです！）</p>
+        <p><b>他人を不快にするような発言や画像の投稿は控えましょう</b></p>
+        <p>ログインは<%= link_to "こちら", new_user_session_path %></p>
+        <p>初めてご利用される方は<%= link_to "こちら", new_user_registration_path %></p>
+  
+        <p>ご質問・ご意見がありましたら運営へ<%= link_to "お問い合わせ", new_contact_path %>をお願いいたします。</p>
+      </div>
+      
     </div>
     <div class="col-2"></div>
   </div>

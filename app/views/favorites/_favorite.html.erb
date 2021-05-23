@@ -1,10 +1,10 @@
 <% if post.favorited_by?(current_user) %>
   <%= link_to post_favorites_path(post), method: :delete, remote: true, class: "favorite-btn favorite-post" do %>
-    ♥<%= post.favorites.count %> いいね
+    ♥<%= post.favorites.count %>いいね
   <% end %>
 <% else %>
   <%= link_to post_favorites_path(post),method: :post, remote: true, class: "glyphicon glyphicon-heart-empty" do %>
-    ♥<%= post.favorites.count %> いいね
+    ♥<%= post.favorites.count %>いいね
   <% end %>
 <% end %>
 
