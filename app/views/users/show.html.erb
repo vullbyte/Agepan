@@ -66,7 +66,7 @@
       <% end %>
       
       <!-- 見ているユーザーの投稿一覧 -->
-      <h4 style="margin-top: 20px;">投稿一覧</h4>
+      <h4 style="margin-top: 20px;"><%= @user.name %>さんの投稿</h4>
       <% @posts.each do |post| %>    
         <div class="posted">
           <div class="posted-user">

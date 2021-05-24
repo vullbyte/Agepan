@@ -28,8 +28,14 @@ class UsersController < ApplicationController
   end
 
   def favorites
+        # 自分のサイドバー表示のため、見たいユーザーとは別に変数を用意(myuser, myfavorites)
+    @myuser = current_user.id
+    @my_user = User.find(@myuser)
+    @myfavorites = Favorite.where(user_id: @my_user)
+    
     @user = User.find(params[:user_id])
     @favorites = Favorite.where(user_id: @user)
+    @posts = Post.page(params[:page]).reverse_order
   end
   
   # 退会画面

@@ -1,23 +1,41 @@
 <%= render 'layouts/error_messages', model: @post %>
+<div class="container">
+  <div class="row">
 
-<h1>投稿フォーム</h1>
-<%= form_with model: @post, local:true do |f| %>
-
-  <div class="form-group">
-    <h4>画像</h4>
-    <!--<= f.attachment_field :image %>-->
-    <%= f.file_field :image, multiple: true %>
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2">
+    <div class="sidebar">
+      <%= render partial: 'users/user_sidebar', locals: { user: @my_user, favorites: @myfavorites,  } %>
+    </div>
   </div>
-
-  <div class="form-group">
-    <h4>本文</h4>
-    <%= f.text_area :body %>
+  
+  <div class="col-sm-5 offset-sm-1">
+    <h2>New Post</h2>
+    <p style="font-size: 5px; color: #FF570D">以下のフォームより投稿してください! 画像は必須ではありません</p>
+    <%= form_with model: @post, local:true do |f| %>
+    
+      <div class="form-group">
+        <h4>画像</h4>
+        <!--<= f.attachment_field :image %>-->
+        <%= f.file_field :image, multiple: true %>
+      </div>
+    
+      <div class="form-group">
+        <h4>投稿内容</h4>
+        <%= f.text_area :body, size: "30x4", class: "form-control" %>
+      </div>
+    
+      <div class="form-group">
+        <!--<= f.label :tag_list %>-->
+        <h4>タグ</h4>
+        <%= f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control", placeholder:"動物, 犬, ペット" %>
+       <p style="font-size: 4px; color: #000">※ 複数のタグはカンマ( , )で区切ってください</p>
+      </div>
+    
+      <%= button_tag "投稿する", :type => "submit", :class =>"btn btn-success rounded-pill float-right" %>
+    <% end %>
   </div>
+  <div class="col-sm-3"></div>
 
-  <div class="form-group">
-    <%= f.label :tag_list %>
-    <%= f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control" %>
-  </div>
-
-  <%= f.submit '投稿' %>
-<% end %>
+</div>
+</div>

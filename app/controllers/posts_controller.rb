@@ -1,5 +1,10 @@
 class PostsController < ApplicationController
   def new
+    # サイドバー表示用
+    @myuser = current_user.id
+    @my_user = User.find(@myuser)
+    @myfavorites = Favorite.where(user_id: @my_user)
+
     @post = Post.new
   end
 
@@ -26,8 +31,18 @@ class PostsController < ApplicationController
     # kaminari機能でページ指定をしつつ一覧取得
     @posts = Post.page(params[:page]).reverse_order
     if params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}")
+      @posts = Post.tagged_with("#{params[:tag_name]}").page(params[:page]).reverse_order
     end
+  
+  end
+  def followed_posts
+    # userのサイドバー表示用(myuser, myfavorites)
+    @myuser = current_user.id
+    @my_user = User.find(@myuser)
+    @myfavorites = Favorite.where(user_id: @my_user)
+    
+    @user = current_user
+    @users = @user.followings.order("created_at DESC").page(params[:page]).per(20)
   end
 
   def show

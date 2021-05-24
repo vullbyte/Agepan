@@ -38,8 +38,12 @@ Rails.application.routes.draw do
 
   get 'search' => 'searches#search'
   root to: 'homes#top'
+  get 'followed_posts' => 'posts#followed_posts'
   resources :posts, only: [:new, :create, :index, :show, :destroy] do
     resource :favorites, only: [:create, :destroy] # 記事詳細表示のルーティングにネスト
     resources :post_comments, only: [:create, :destroy]
+    member do
+      get :users_posts
+    end
   end
 end

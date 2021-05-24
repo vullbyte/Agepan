@@ -92,9 +92,7 @@ main{
   font-family: 'Amatic SC', cursive;
   align-items: flex-end;
 }
-.search_genre{
 
-}
 // -- 検索ワード入力欄 --
 .search_text {
   color:  #CC9966;
@@ -110,13 +108,9 @@ main{
   height: 22px;
 }
 
-#show-body{
-  // margin: 0 auto;
-  // align-items: center;
-}
 
 // ブックマークした投稿一覧から飛んだ先の投稿本文(body)とユーザーページ(name)へのCSS
-.post_body{
+.Editlink{
     text-decoration: none;
     // color: #38aef0 ;
     color: #000 ;

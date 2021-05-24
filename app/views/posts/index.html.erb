@@ -7,40 +7,46 @@
       <%= render partial: 'users/user_sidebar', locals: { user: @my_user, favorites: @myfavorites,  } %>
     </div>
   </div>
-  
-  <div class="col-sm-8 offset-sm-1">
-    <h2>Timeline</h2>
-    <% @posts.each do |post| %>    
 
-    <div class="posted">
-      <div class="posted-user">
-        <%= attachment_image_tag post.user.profile_image , :profile_image, format: 'jpeg', size: "30x30", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
-        <%= link_to post_path(post) do %>
-          <%= post.user.name %>
-        <% end %>
-      </div>
-      <div class="posted-body">
-        <p class="mt-2 pl-sm-3"><%= post.body %></p>
-        <% post.image.each do |img| %>
-          <%= image_tag img.url ,class: 'sized' %>
-        <% end %>
-      </div>
-      <div class="row" id="posted-info">
-        <div class="col-sm-2">
-          <p class="pl-sm-3"><%= post.created_at.strftime('%Y/%m/%d') %></p>
-        </div>
-        <div class="col-sm-2", id="favorite_<%= post.id %>">
-          <%= render partial: 'favorites/favorite', locals: { post: post } %>
-        </div>
-        <div class="col-sm-2">
-          <%= "コメント(#{post.post_comments.count})" %></p>
-        </div>
-        <div class="col-sm-6">
-          <p>タグ：<%= render 'posts/tag_list', tag_list: post.tag_list %></p>
-        </div>
-        <!--<p><= link_to "#{post.post_comments.count} コメント", post_path(post.id) %></p>-->
+  <div class="col-sm-8 offset-sm-1">
+    <div class="row">
+      <div class="col-sm-8"><h2>Timeline</h2></div>
+      <div class="col-sm-4">
+      <%= link_to followed_posts_path  do %>
+        <p class="btn btn-info mb-sm-3">フォロー中のツイートを見る</br></p>
+      <% end %>
       </div>
     </div>
+    <% @posts.each do |post| %>
+
+      <div class="posted">
+        <div class="posted-user">
+          <%= attachment_image_tag post.user.profile_image , :profile_image, format: 'jpeg', size: "30x30", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+          <%= link_to post_path(post) do %>
+            <%= post.user.name %>
+          <% end %>
+        </div>
+        <div class="posted-body">
+          <p class="mt-2 pl-sm-3"><%= post.body %></p>
+          <% post.image.each do |img| %>
+            <%= image_tag img.url ,class: 'sized' %>
+          <% end %>
+        </div>
+        <div class="row" id="posted-info">
+          <div class="col-sm-2">
+            <p class="pl-sm-3"><%= post.created_at.strftime('%Y/%m/%d') %></p>
+          </div>
+          <div class="col-sm-2", id="favorite_<%= post.id %>">
+            <%= render partial: 'favorites/favorite', locals: { post: post } %>
+          </div>
+          <div class="col-sm-2">
+            <%= "コメント(#{post.post_comments.count})" %></p>
+          </div>
+          <div class="col-sm-6">
+            <p>タグ：<%= render 'posts/tag_list', tag_list: post.tag_list %></p>
+          </div>
+        </div>
+      </div>
     <% end %>
     <%= paginate @posts %>
   </div>

@@ -36,11 +36,9 @@
     <tr>
       <td colspan="2">
         <% if favorites.present? %>
-          <% favorites.each do |favorite| %>
             <%= link_to user_favorites_path(user) do %>
-              <p>ブックマーク投稿一覧</p>
+              <p>あなたがいいねした投稿</p>
             <% end %>
-          <% end %>
         <% end %>
       </td>
     </tr>
