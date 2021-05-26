@@ -1,8 +1,7 @@
 <%= form_with model: [post, post_comment], remote: true do |form| %>
-  <div>
-    <%= form.text_area :comment %>
-  </div>
+    <%= form.text_area :comment ,size: "40x4", class: "form-control" %>
+
   <div class="actions">
-    <%= form.submit "コメントをする" %>
+    <%= button_tag "コメントする", :type => "submit", :class =>"btn btn-light rounded-pill" %>
   </div>
 <% end %>

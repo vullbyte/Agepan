@@ -4,9 +4,7 @@ class PostCommentsController < ApplicationController
     @comments = @post.post_comments.build(post_comment_params)
     @comments.user_id = current_user.id
     @post_comments = @post.post_comments
-    if @comments.save
-      render :index
-    end
+    render :index if @comments.save
   end
 
   def destroy
@@ -14,9 +12,7 @@ class PostCommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     @comment = PostComment.find(params[:id])
     @post_comments = @post.post_comments
-    if @comment.destroy
-      render :index
-    end
+    render :index if @comment.destroy
   end
 
   private

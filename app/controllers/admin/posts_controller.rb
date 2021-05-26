@@ -1,12 +1,8 @@
 class Admin::PostsController < ApplicationController
-
   def index
-
     # kaminari機能でページ指定をしつつ一覧取得
     @posts = Post.page(params[:page]).reverse_order
-    if params[:tag_name]
-      @posts = Post.tagged_with("#{params[:tag_name]}")
-    end
+    @posts = Post.tagged_with(params[:tag_name].to_s) if params[:tag_name]
   end
 
   def show
@@ -28,8 +24,8 @@ class Admin::PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:body, :tag_list, { image: [] }, :user_id)
   end
+
   def user_params
     params.require(:user).permit(:name, :profile_image, :profile)
   end
-
 end

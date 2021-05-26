@@ -1,15 +1,11 @@
 class Admin::UsersController < ApplicationController
   def index
     @users = User.all
-    # @user = User.find(params[:id])
   end
 
   def show
     @user = User.find(params[:id])
     @posts = @user.posts
-
-    @favorites = Favorite.where(user_id: @user)
-
   end
 
   def edit

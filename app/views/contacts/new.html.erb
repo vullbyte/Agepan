@@ -1,15 +1,28 @@
-<%= form_for @contact do |f| %>
+<div class="container">
+  <div class="row">
+    <div class="col-8 offset-2", id="form-contact">
+      <h2 class="title text-center">お問い合わせ</h2>
 
-  <div class="form-group">
-    <%= f.label :email, '返信先メールアドレス' %>
-    <%= f.text_field :email, class: 'form-control' %>
+      <%= form_for @contact do |f| %>
+
+        <div class="form-group" >
+          <%= f.label :email, '返信先メールアドレス' %>
+          <%= f.text_field :email, class: 'form-control' %>
+        </div>
+
+       <div class="form-group">
+         <%= f.label :message, 'お問い合わせ内容' %>
+         <%= f.text_area :message, size: '10x10', class: 'form-control' %>
+       </div>
+
+        <!--<= f.submit '送信' %>-->
+        <div class="contact-submit">
+          <%= button_tag "送信", :type => "submit", :class =>"btn btn-success" %>
+        </div>
+      <% end %>
+
+    </div>
+    <div class="col-2"></div>
   </div>
+</div>
 
- <div class="form-group">
-   <%= f.label :message, 'お問い合わせ内容' %>
-   <%= f.text_area :message, size: '10x10', class: 'form-control' %>
- </div>
-
-  <%= f.submit '送信' %>
-
-<% end %>

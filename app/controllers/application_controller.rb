@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   # ログイン済ユーザーのみにアクセスを許可する
+  # 権限関連悩み中です
   # before_action :authenticate_user!
 
   # deviseコントローラーにストロングパラメータを追加する
@@ -8,18 +9,22 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     case resource
     when Admin
-      root_path          #pathは設定したい遷移先へのpathを指定してください
+      root_path
     when User
-      root_path              #ここもpathはご自由に変更してください
+      user_path(resource)
     end
   end
 
+  def after_sign_out_path_for(_resource)
+    new_user_session_path # ログアウト後に遷移するpathを設定
+  end
 
   protected
+
   def configure_permitted_parameters
     # サインアップ時にnameのストロングパラメータを追加
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     # アカウント編集の時にnameとprofileのストロングパラメータを追加
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :profile])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name profile])
   end
 end
