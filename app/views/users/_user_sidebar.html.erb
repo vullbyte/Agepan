@@ -1,4 +1,4 @@
-  <h2 class="title text-left">my profile</h2>
+<h2 class="title text-left">my profile</h2>
 <table class="table table-borderless">
 
   <thead>
@@ -26,7 +26,6 @@
     <tr>
       <td colspan="2">
         <% if current_user.id == user.id || current_user.admin? %>
-          <!--<= link_to "プロフィール編集", edit_user_path(user) %>-->
           <%= link_to edit_user_path(user), class:"btn btn-outline-info btn-block fas fa-user-cog" do %>
             プロフィール編集
           <% end %>

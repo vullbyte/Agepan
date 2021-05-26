@@ -1,5 +1,5 @@
 <% post_comments.each do |comment| %>
-  <div class="posted-comment">
+  <div class="posted-comment pl-sm-3">
     <% unless comment.id.nil? %>
       <%= attachment_image_tag @post.user.profile_image , :profile_image, format: 'jpeg', size: "40x40", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
       <%= link_to "#{comment.user.name}さん", user_path(comment.user.id) %>からのコメント

@@ -26,7 +26,6 @@
       </div>
     
       <div class="form-group">
-        <!--<= f.label :tag_list %>-->
         <h4>タグ</h4>
         <%= f.text_field :tag_list, value: @post.tag_list.join(','), class: "form-control", placeholder:"動物, 犬, ペット" %>
        <p style="font-size: 4px; color: #000">※ 複数のタグはカンマ( , )で区切ってください</p>

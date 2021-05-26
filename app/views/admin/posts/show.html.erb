@@ -1,49 +1,52 @@
   <div class="container">
   <div class="row">
 
-  <div class="col-5" >
+  <div class="col-sm-1"></div>
+  <div class="col-sm-2"></div>
 
-  </div>
-
-  <div class="col-7">
-    <h2>投稿詳細</h2>
-      <div>
-        <!--<= attachment_image_tag @post, :image, format: 'jpeg', size: "200x200",  fallback: "pastel_00011.jpg" %>-->
-      <% @post.image.each do |img| %>
-        <%= image_tag img.url %>
-      <% end %>
+  <div class="col-sm-8 offset-sm-1">
+    <% if admin_signed_in? %>
+      <%= link_to "削除する", user_path(@user), method: :delete, "data-confirm" => "削除しますか？" %>
+    <% end %>
+    <h2>Post info</h2>
+    <div class="posted">
+      <div class="posted-user">
+        <%= link_to user_path(@post.user) do %>
+          <p>
+            <%= attachment_image_tag @post.user.profile_image , :profile_image, format: 'jpeg', size: "40x40", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+            <%= @post.user.name %>
+          </p>
+        <% end %>
       </div>
-
-    <div class="row">
-      <div id="show-body">
-            <p><%= @post.body %></p>
+      <div class="posted-body">
+        <p class="mt-2 pl-sm-3"><%= @post.body %></p>
+        <% @post.image.each do |img| %>
+          <%= image_tag img.url ,class: 'sized-show' %>
+        <% end %>
       </div>
-    </div>
-    <div class="row">
-      <p>ユーザーネーム：<%= @post.user.name %></p>
-      <p>投稿日時：<%= @post.created_at.strftime('%Y/%m/%d') %></p>
-    </div>
-
-      <% if admin_signed_in? %>
-        <%= link_to "投稿削除", post_path(@post), method: :delete, data: {confirm: "本当に消しますか？"}%>
-      <% end %>
-
-      <p><%= render 'posts/tag_list', tag_list: @post.tag_list %></p>
-
       <div class="row">
-        <div id="comments_area">
-          <% if user_signed_in? %>
-          <div style="margin: 0 10px;">
-            <!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
-            <%= render partial: 'post_comments/form', locals: { post_comment: @post_comment, post: @post } %>
-          </div>
-          <% end %>
-
-
-          <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
-          <%= render partial: 'post_comments/index', locals: { post_comments: @post_comments } %>
+        <div class="col-sm-2">
+          <p class="pl-sm-3"><%= @post.created_at.strftime('%Y/%m/%d') %></p>
+        </div>
+        <div class="col-sm-2", id="favorite_<%= @post.id %>">
+        </div>
+        <div class="col-sm-2">
+          <%= "コメント(#{@post.post_comments.count})" %></p>
+        </div>
+        <div class="col-sm-6">
+          <p>タグ：<%= render 'posts/tag_list', tag_list: @post.tag_list %></p>
         </div>
       </div>
+      <div class="row pl-sm-3">
+        <div id="comments_area">
+          <div class="pl-sm-3">
+          <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
+            <%= render partial: 'post_comments/index', locals: { post_comments: @post_comments, user: current_user } %>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
+</div>
 </div>

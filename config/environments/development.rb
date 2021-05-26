@@ -67,15 +67,14 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = true # メール送信ができなかった場合、エラーを発生させる
   config.action_mailer.delivery_method = :smtp # メール送信する際に通信プロトコルSMTPを利用する
   config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                  587,
-    domain:               'gmail.com',
-  #-----変更点---------------------------
-    user_name:            ENV['GMAIL_ADDRESS'],
-    password:             ENV['GMAIL_PASS'],
-  #----変更点ここまで-----------------------
-    authentication:       'plain',
-    enable_starttls_auto:  true
+    address: 'smtp.gmail.com',
+    port: 587,
+    domain: 'gmail.com',
+    #-----変更点---------------------------
+    user_name: ENV['GMAIL_ADDRESS'],
+    password: ENV['GMAIL_PASS'],
+    #----変更点ここまで-----------------------
+    authentication: 'plain',
+    enable_starttls_auto: true
   }
-
 end

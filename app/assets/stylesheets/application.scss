@@ -25,25 +25,6 @@
   box-sizing: border-box;
 }
 
-// -----ナビゲーションバー部分------
-#nav {
-  list-style: none;
-  overflow: hidden;
-}
-#nav li {
-  width: 100px;
-  text-align: center;
-  background-color: #CC9966;
-  float: left;
-  margin-top: 10px;
-}
-#nav li a {
-  text-decoration: none;
-  color: #fff;
-  font-weight: bold;
-}
-//  -----ナビゲーションバーここまで-----
-
 header, nav, body {
   font-family: Chalkduster, "Bradley Hand", Courier, "Segoe Print", sans-serif;
 }
@@ -59,13 +40,57 @@ footer {
     color: #fff;
     text-align: center;
     padding: 30px 0;
-    background-image: url(bg003.png);     /* 背景画像指定 */
+    background-image: image-url("bg003.png");     /* 背景画像指定 */
     background-repeat: repeat-x;                /* 背景の繰り返し設定 */
     background-size: contain;
 }
-header {
 
+header {
+  
+    // ロゴ
+    .logo {
+      display: inline-block;
+      font-size: 1.4em;
+      font-family: 'Amatic SC', cursive;
+    }
+    // ナビゲーションバー
+    #nav {
+      list-style: none;
+      overflow: hidden;
+    }
+    #nav li {
+      width: 100px;
+      text-align: center;
+      background-color: #CC9966;
+      float: left;
+      margin-top: 10px;
+    }
+    #nav li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+    }
+
+    // 検索欄
+    .form-genre{
+      padding-bottom: 10px;
+      font-family: 'Amatic SC', cursive;
+      align-items: flex-end;
+        .search_text {
+          color:  #000;
+          width: 150px;
+        }
+        .search_submit{
+          background-color: #33CC00;
+          color: #FFF;
+          width: 42px;
+          border-radius: 30%;
+          cursor: pointer;
+          height: 22px;
+        }
+    }
 }
+
 body {
   display: flex;
   flex-flow: column;
@@ -76,157 +101,126 @@ main{
   flex: 1;
   padding-top: 20px;
   padding-bottom: 20px;
-}
+  
+      // Topページの透過画像用
+    .content{
+        width: 100%;
+        height: 300px;
+        background: #000;
+        position: relative;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        .welcome{
+            width: 100%;
+            height: 1.5em;
+            color: #fff;
+            font-weight: bold;
+            text-align: center;
+            font-size: 30px;
+            font-family: 'Sacramento', cursive;
+            position: absolute;
+            margin: auto;
+            top: 0;
+            bottom: 0;
+        }
+        .bg{
+            width: 90%;
+            height: 100%;
+            position: relative;
+            margin: 0 auto;
+            background: image-url("moufu_megane.jpg");
+            background-size: cover;
+            opacity: 0.8;
+        }
+    }
 
-// ロゴ
-.logo {
-  display: inline-block;
-  font-size: 1.4em;
-  font-family: 'Amatic SC', cursive;
-}
+    // Topページの紹介文
+    #introduction{
+      text-align: center;
+      #introduction-text{
+        display: inline-block;
+        text-align: left;
+      }
+    }
+    // ログインや新規登録のフォーム
+    .field, .actions, .shared_action{
+      padding-top: 10px;
+    }
+    // お問い合わせフォーム
+    #form-contact{
+      padding-top: 10px;
+    }
+    .contact-submit{
+      float: right;
+    }
+    // サイドバーの表示
+    tr.underline {
+        border-bottom: solid;
+        border-bottom-color: #BBBBBB;
+        border-bottom-width: 1px;
+    }
+    
+    // --投稿関連のレイアウト--
+    .posted{
+      border-style: groove;
+      .posted-user{
+        margin-left: 3px;
+        border-bottom-style: double;
+        border-bottom-color: #BBBBBB;
+        border-bottom-width: 1px;
+        padding-bottom: 5px;
+      }
+      .posted-body{
+         // post_indexの画像サイズ
+        .sized{
+          width: 10%;
+          height: 10%;
+          border: solid;
+          border-width: 0.5px;
+          border-color: #BBBBBB;
+          margin-bottom: 5px;
+          margin-left: 20px;
+        }
+        //post_showの画像サイズ
+        .sized-show{
+          width: 40%;
+          height: 40%;
+          border: solid;
+          border-width: 0.5px;
+          border-color: #BBBBBB;
+          margin-bottom: 5px;
+          margin-left: 20px;
+          display: flex;
+          align-items: flex-start;
+        }
+      }
+      #posted-info{
+        padding-top: 5px;
+      }
+      .posted-comment{ // これだけpost_comments/_index にてclassを指定している
+        border-top-style: solid;
+        border-top-color: #BBBBBB;
+        border-top-width: 1px;
+      }
+    }
+    
+    // UserのEdit画面、ファイル選択ボタンのレイアウト
+    .item_image_btn{
+      // 元のボタンを消す
+      display: none;
+    }
+    #img_field {
+      // 新しいボタン
+      font-size: 15px;
+      color: white;
+      background-color: #00BB00;
+      border-radius: 10px;
+      width: 100px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      margin-top: 5px;
+    
+    }
 
-// --ヘッダーの右上にある検索欄--
-.form-genre{
-  // margin-top: 10px;
-  padding-bottom: 10px;
-  font-family: 'Amatic SC', cursive;
-  align-items: flex-end;
-}
-
-// -- 検索ワード入力欄 --
-.search_text {
-  color:  #CC9966;
-  width: 150px;
-}
-.search_submit{
-  background-color: #33CC00;
-  color: #FFF;
-  width: 42px;
-  border-radius: 30%;
-  cursor: pointer;
-  // border: none;
-  height: 22px;
-}
-
-
-// ブックマークした投稿一覧から飛んだ先の投稿本文(body)とユーザーページ(name)へのCSS
-.Editlink{
-    text-decoration: none;
-    // color: #38aef0 ;
-    color: #000 ;
-}
-.post_name{
-    text-decoration: none;
-    // color: #38aef0 ;
-    color: #000 ;
-    margin-left: 10px;
-}
-
-// Topページの透過画像用
-.content{
-    width: 100%;
-    height: 300px;
-    background: #000;
-
-    position: relative; /*相対位置*/
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-.welcome{
-    width: 100%; /*absoluteで位置を設定するときに、幅と高さは必ず必要*/
-    height: 1.5em;
-    color: #fff;
-    font-weight: bold;
-    text-align: center;
-    font-size: 30px;
-    font-family: 'Sacramento', cursive;
-
-    /*位置の設定 - 上下中央寄せ*/
-    position: absolute;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-}
-.bg{
-    /*位置の設定*/
-    width: 90%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 50px;
-
-    /*背景画像の設定*/
-    background: url(moufu_megane.jpg);
-    background-size: cover;
-
-    /*透過の設定*/
-    opacity: 0.8;
-}
-
-// Topページの紹介文
-#introduction{
-  text-align: center;
-}
-#introduction-text{
-  display: inline-block;
-  text-align: left;
-}
-
-// ログインや新規登録のフォーム
-.field, .actions, .shared_action{
-  padding-top: 10px;
-}
-// お問い合わせフォーム
-#form-contact{
-  padding-top: 10px;
-}
-.contact-submit{
-  float: right;
-}
-// サイドバーの表示
-tr.underline {
-    border-bottom: solid;
-    border-bottom-color: #BBBBBB;
-    border-bottom-width: 1px;
-}
-
-// 投稿一覧の画像
-.sized{
-  width: 10%;
-  height: 10%;
-  border: solid;
-  border-width: 0.5px;
-  border-color: #BBBBBB;
-  margin-bottom: 5px;
-  margin-left: 20px;
-}
-.sized-show{ //投稿詳細の画像
-  width: 40%;
-  height: 40%;
-  border: solid;
-  border-width: 0.5px;
-  border-color: #BBBBBB;
-  margin-bottom: 5px;
-  margin-left: 20px;
-  display: flex;
-  align-items: flex-start;
-}
-// indexやshowでの1投稿全体について
-.posted{
-  border-style: groove;
-}
-.posted-user{
-  margin-left: 3px;
-  border-bottom-style: double;
-  border-bottom-color: #BBBBBB;
-  border-bottom-width: 1px;
-  padding-bottom: 5px;
-}
-#posted-info{
-  padding-top: 5px;
-}
-.posted-comment{
-  border-top-style: solid;
-  border-top-color: #BBBBBB;
-  border-top-width: 1px;
 }
