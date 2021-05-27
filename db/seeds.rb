@@ -9,9 +9,8 @@
 # 管理者のメールアドレスとパスワードを事前に追加(URLは直接入力)
 Admin.create!(email: 'admin@test.com', password: 'testtest')
 
-# User.create!(name: 'admin', email: 'c@c', password: 'testtest', admin: 'TRUE')
-User.create!(name: 'tarou', email: 'a@test.com', password: 'testtest')
-User.create!(name: 'jirou', email: 'b@test.com', password: 'testtest')
+# User.create!(name: 'tarou', email: 'a@test.com', password: 'testtest')
+# User.create!(name: 'jirou', email: 'b@test.com', password: 'testtest')
 
 # Post.create!(user_id: '2', body: 'test')
 # Post.create!(user_id: '1', body: 'yeaaaah')

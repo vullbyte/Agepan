@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     passwords: 'admins/passwords',
     registrations: 'admins/registrations'
   }
-  # resources :admins
+
   namespace :admin do
     resources :posts, only: %i[index show edit update destroy]
     resources :users, only: %i[index create new edit show update destroy]

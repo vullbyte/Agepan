@@ -1,45 +1,17 @@
-<h2 class="title text-left">my profile</h2>
-<table class="table table-borderless">
+<h2>my profile</h2>
+  <%= attachment_image_tag user, :profile_image, format: 'jpeg', size: "100x100", fallback: "no_image.jpg" %>
+  <p>名前 : <%= user.name %></p>
+    <p>メールアドレス : <%= user.email %></p>
+    <p>プロフィール : <%= user.profile %></p>
 
-  <thead>
-    <th>
-      <%= attachment_image_tag @user, :profile_image, format: 'jpeg', size: "100x100", fallback: "no_image.jpg" %>
-    </th>
-  </thead>
-  <tbody>
+    <% if current_user.id == user.id || current_user.admin? %>
+      <p><%= link_to "プロフィール編集", edit_user_path(user) %></p>
+    <% end %>
 
-  </tbody>
-    <tr class="underline">
-      <td><b>名前</b></td>
-      <td><%= user.name %></td>
-    </tr>
-    <tr class="underline">
-      <td><b>メールアドレス</b></td>
-      <td><%= user.email %></td>
-    </tr>
-    <tr>
-      <td colspan="2"><b>プロフィール</b></td>
-    </tr>
-    <tr class="underline">
-      <td colspan="2"><%= user.profile %></td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <% if current_user.id == user.id || current_user.admin? %>
-          <%= link_to edit_user_path(user), class:"btn btn-outline-info btn-block fas fa-user-cog" do %>
-            プロフィール編集
-          <% end %>
+    <% if favorites.present? %>
+      <% favorites.each do |favorite| %>
+        <%= link_to user_favorites_path(user) do %>
+          <p>ブックマーク投稿一覧</p>
         <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2">
-        <% if favorites.present? %>
-            <%= link_to user_favorites_path(user) do %>
-              <p>あなたがいいねした投稿</p>
-            <% end %>
-        <% end %>
-      </td>
-    </tr>
-
-</table>
+      <% end %>
+    <% end %>
