@@ -7,17 +7,13 @@
   <div class="col-sm-8 offset-sm-1">
     <div class="row">
       <div class="col-sm-8"><h2>Timeline</h2></div>
-      <div class="col-sm-4">
-      <%= link_to followed_posts_path  do %>
-        <p class="btn btn-info mb-sm-3">フォロー中のツイートを見る</br></p>
-      <% end %>
-      </div>
+      <div class="col-sm-4"></div>
     </div>
     	<% @users.each do |user| %>
 
       <div class="posted">
         <div class="posted-user">
-          <%= attachment_image_tag user.profile_image , :profile_image, format: 'jpeg', size: "60x60", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+          <%= attachment_image_tag user , :profile_image, format: 'jpeg', size: "60x60", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
           <%= link_to admin_user_path(user) do %>
             <%= user.name %>
           <% end %>

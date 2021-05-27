@@ -14,7 +14,7 @@
       <div class="posted-user">
         <%= link_to user_path(@post.user) do %>
           <p>
-            <%= attachment_image_tag @post.user.profile_image , :profile_image, format: 'jpeg', size: "40x40", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+            <%= attachment_image_tag @post.user , :profile_image, format: 'jpeg', size: "40x40", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
             <%= @post.user.name %>
             <% if @post.user == current_user %>
               <%= link_to post_path(@post), method: :delete, data: {confirm: "本当に消しますか？"} do %>
@@ -46,7 +46,7 @@
           <p>タグ：<%= render 'posts/tag_list', tag_list: @post.tag_list %></p>
         </div>
       </div>
-      
+
       <div class="row pl-sm-3">
         <div id="comments_area">
           <% if user_signed_in? %>
@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
 

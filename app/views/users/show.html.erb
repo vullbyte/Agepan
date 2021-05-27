@@ -7,16 +7,16 @@
       <%= render partial: 'users/user_sidebar', locals: { user: @my_user, favorites: @myfavorites,  } %>
     </div>
   </div>
-  
+
   <div class="col-sm-8 offset-sm-1">
     <!-- ユーザーが自分だったらユーザー情報無しで投稿だけ表示させる -->
     <% if @user.id == @my_user.id %>
         <h2 class="title text-left">Your Post</h2>
-  
-        <% @posts.each do |post| %>    
+
+        <% @posts.each do |post| %>
         <div class="posted">
           <div class="posted-user">
-            <%= attachment_image_tag post.user.profile_image , :profile_image, format: 'jpeg', size: "30x30", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+            <%= attachment_image_tag post.user , :profile_image, format: 'jpeg', size: "30x30", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
             <%= link_to post_path(post) do %>
               <%= post.user.name %>
             <% end %>
@@ -43,7 +43,7 @@
           </div>
         </div>
         <% end %>
-        
+
     <% else %>
         <!-- 自分以外のユーザーの時はそのプロフィールと投稿を表示 -->
         <h2><%= @user.name %>さんのページ</h2>
@@ -71,7 +71,7 @@
                 </tr>
             </tbody>
         </table>
-        
+
         <% if user_signed_in? &&  @my_user != @user %>
           <div id="follow_form-<%= @user.id %>" >
             <% if @my_user.following?(@user) %>
@@ -81,14 +81,14 @@
             <% end %>
           </div>
         <% end %>
-  
+
         <%= link_to  user_favorites_path(@user) do %>
           <p class="mt-sm-3"><%= @user.name %>さんがいいねした投稿一覧</p>
         <% end %>
-        
+
         <!-- 見ているユーザーの投稿一覧 -->
         <h4 style="margin-top: 20px;"><%= @user.name %>さんの投稿</h4>
-        <% @posts.each do |post| %>    
+        <% @posts.each do |post| %>
           <div class="posted">
             <div class="posted-user">
               <%= attachment_image_tag post.user.profile_image , :profile_image, format: 'jpeg', size: "30x30", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
@@ -119,7 +119,7 @@
           </div>
         <% end %>
       <% end %>
-      
+
   </div>
 
 </div>

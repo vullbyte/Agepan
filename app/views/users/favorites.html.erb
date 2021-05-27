@@ -14,10 +14,10 @@
         <!--　投稿とユーザーの情報取得  -->
         <% post = Post.find_by(id: favorite.post_id) %>
         <% user = User.find_by(id: post.user_id) %>
-  
+
         <div class="posted">
           <div class="posted-user">
-            <%= attachment_image_tag post.user.profile_image , :profile_image, format: 'jpeg', size: "30x30", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+            <%= attachment_image_tag post.user , :profile_image, format: 'jpeg', size: "30x30", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
             <%= link_to post_path(post) do %>
               <%= post.user.name %>
             <% end %>
@@ -45,8 +45,8 @@
         </div>
     <%= paginate @posts %>
 
-    <% end %>    
+    <% end %>
   </div>
-  
+
 </div>
 </div>

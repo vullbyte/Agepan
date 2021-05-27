@@ -8,7 +8,7 @@
           <%= link_to "退会させる", user_path(@user), method: :delete, "data-confirm" => "退会させますか？" %>
         <% end %>
         <h2><%= @user.name %>さんのページ</h2>
-        <%= attachment_image_tag @user.profile_image , :profile_image, format: 'jpeg', size: "100x100", fallback: "no_image.jpg", class:"mt-sm-2 mb-sm-2" %>
+        <%= attachment_image_tag @user , :profile_image, format: 'jpeg', size: "100x100", fallback: "no_image.jpg", class:"mt-sm-2 mb-sm-2" %>
         <p>名前 : <%= @user.name %></p>
         <p>メールアドレス : <%= @user.email %></p>
         <p>プロフィール : <%= @user.profile %></p>
