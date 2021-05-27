@@ -9,44 +9,17 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <header>
-    <nav class="navbar-expand-lg navbar-light gnav";>
-      <div class = "container">
-
-        <div class="row">
-          <div class="col-2">
-              <div class="logo">
-                <%= link_to root_path, class: "navbar-brand" do %>
-                  <%= image_tag("/assets/パンダアイコン4.png", size: '40x40') %> Agepan
-                <% end %>
-              </div>
-          </div>
-          <div class="col-6", style="margin-top: 5px;">
-            <!-- ナビゲーションバー -->
-            <%= render 'layouts/link_header' %>
-          </div>
-          <div class="col-4", style="margin-top: 10px;">
-            <%= form_tag(search_path, method: :get) do %>
-              <%= select_tag 'range', options_for_select([['--選択してください--', ''], ['User', '1'], ['Post', '2']]), class: 'form-janre'   %>
-              <!--　下の行は本来検索精度を上げるためのものですが、部分一致しかいらないかなと判断しました。search controllerの方で部分一致を強制的に入れています。　-->
-              <!--<= select_tag 'search', options_for_select([["前方一致","forward_match"], ["後方一致","backward_match"], ["完全一致","perfect_match"], ["部分一致","partial_match"]]), class: 'form-janre' %>-->
-              <%= text_field_tag (:word) %>
-              <%= submit_tag "検索", class: 'form-janre' %>
-            <% end %>            
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-12 text-right">
-
-          </div>
-        </div>
-
-      </div>
-    </nav>
-  </header>
-
   <body>
-    <%= yield %>
+      <header>
+        <%= render 'layouts/header' %>
+      </header>
+      <main>
+        <%= flash[:notice] %>
+        <%= yield %>
+      </main>
+      <footer>
+        <%= render 'layouts/footer' %>
+      </footer>
   </body>
+
 </html>

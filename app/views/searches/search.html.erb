@@ -1,67 +1,64 @@
-<h2>Results index</h2>
-<!--posts一覧 -->
-<table class="table table-hover table-inverse">
-　<% if @range == '2' %>
-  <thead>
-    <tr>
-     <th></th>
-     <th>Title</th>
-     <th>Opinion</th>
-     <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="container">
+  <div class="row">
 
-  <tbody>
-     <% @post.each do |post| %>
-     <tr>
-      <td>
-       <%= link_to(post.user) do %>
-       <%= attachment_image_tag(post.user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg") %>
-       <% end %>
-      </td>
-      <td>
-        <%= link_to(post.user) do %>
-          <%= post.user.name %>
-        <% end %>
-      </td>
-      <!--<td>-->
-       <!--<= link_to post.title, post, class: "post_#{post.id}" %> -->
-      <!--</td>-->
-      <td><%= post.body %></td>
-      <td>
-        <p>コメント件数：<%= post.post_comments.count %></p>
-        <% post.post_comments.each do |post_comment| %>
-          <%= post_comment.user.name %>
-          <%= post_comment.created_at.strftime('%Y/%m/%d') %>
-          <%= post_comment.comment %>
-          <% if post_comment.user == current_user %>
-            <div class="comment-delete">
-              <%= link_to "削除", post_post_comment_path(post_comment.post, post_comment), method: :delete %>
+  <div class="col-sm-1"></div>
+  <div class="col-sm-8 offset-sm-1">
+  <h2>Results index</h2>
+
+　<% if @range == '2' %>
+      <% @post.each do |post| %>
+        <div class="posted">
+          <div class="posted-user">
+            <%= attachment_image_tag post.user.profile_image , :profile_image, format: 'jpeg', size: "40x40", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+            <%= link_to post_path(post) do %>
+              <%= post.user.name %>
+            <% end %>
+          </div>
+          <div class="posted-body">
+            <p class="mt-2 pl-sm-3"><%= post.body %></p>
+            <% post.image.each do |img| %>
+              <%= image_tag img.url ,class: 'sized' %>
+            <% end %>
+          </div>
+          <div class="row" id="posted-info">
+            <div class="col-sm-2">
+              <p class="pl-sm-3"><%= post.created_at.strftime('%Y/%m/%d') %></p>
             </div>
-          <% end %>
-        <% end %>
-      </td>
-     </tr>
-     <% end %>
-  </tbody>
+            <div class="col-sm-2", id="favorite_<%= post.id %>">
+              <%= render partial: 'favorites/favorite', locals: { post: post } %>
+            </div>
+            <div class="col-sm-2">
+              <%= "コメント(#{post.post_comments.count})" %></p>
+            </div>
+            <div class="col-sm-6">
+              <p>タグ：<%= render 'posts/tag_list', tag_list: post.tag_list %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <!--<= paginate @post %>-->
 
   <% else %>
-  <thead>
-     <tr>
-      <th>image</th>
-      <th>name</th>
-      <th colspan="3"></th>
-     </tr>
-   </thead>
 
-   <tbody>
-    <% @user.each do |user| %>
-     <tr>
-      <td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no_image.jpg") %></td>
-      <td><%= user.name%></td>
-      <td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
-     </tr>
-    <% end %>
-   </tbody>
-   <% end %>
- </table>
+      <% @user.each do |user| %>
+        <div class="posted">
+          <div class="posted-user">
+            <%= attachment_image_tag user.profile_image , :profile_image, format: 'jpeg', size: "60x60", fallback: "no_image.jpg", class:"mt-sm-2 rounded-circle"; %>
+            <%= link_to user_path(user) do %>
+              <%= user.name %>
+            <% end %>
+          </div>
+          <div class="posted-body">
+            <p class="mt-2 pl-sm-3"><%= user.profile %></p>
+          </div>
+        </div>
+      <% end %>
+
+  <% end %>
+  </div>
+
+  <div class="col-sm-2"></div>
+
+
+  </div>
+</div>
