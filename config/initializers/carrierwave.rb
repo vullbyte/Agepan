@@ -3,12 +3,12 @@
     config.fog_credentials = {
       provider: 'AWS',
       aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
-      aws_secret_access_key: 'OHVtGiDYDSnSBpkj78cs/rcphigBz+bIXb1sTm+z',
+      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY_ID'],
       region: 'ap-northeast-1'
     }
     config.fog_public = false
 
-    config.fog_directory  = 'agepan-image'
+    config.fog_directory  = ENV['S3_FOG_DIRECTORY']
     config.cache_storage = :fog
   end
  end
