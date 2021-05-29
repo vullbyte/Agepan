@@ -90,3 +90,5 @@ gem 'mini_magick'
 
 gem 'rubocop', require: false
 gem 'rubocop-rails'
+
+gem 'fog-aws'

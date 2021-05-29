@@ -1,10 +1,25 @@
 class ImageUploader < CarrierWave::Uploader::Base
+  if Rails.env.development?
+    storage :file
+  elsif Rails.env.test?
+    storage :file
+  else
+    storage :fog
+  end
+
+  def extension_whitelist
+    %w(png jpg)
+  end
+
+  def filename
+    original_filename if original_filename
+  end
   # Include RMagick or MiniMagick support:
   # include CarrierWave::RMagick
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  # storage :file
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
