@@ -7,11 +7,11 @@ class Post < ApplicationRecord
   serialize :image, JSON # SQLiteを使っているときはこの列を追記
 
   belongs_to :user
-  # attachment :image 'carrierwave'導入時にコメントアウト
+  # attachment :image  <- carrierwave導入時にコメントアウト
   has_many :post_comments, dependent: :destroy
 
   has_many :favorites, dependent: :destroy
-
+  
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
@@ -29,4 +29,10 @@ class Post < ApplicationRecord
               Post.all
             end
   end
+
+  # NGワード作成
+  NGWORD = %w(クソ野郎 糞　)
+  NGWORD_REGEX = %r(#{NGWORD.join('|')})
+  validates :body, format: { with: NGWORD_REGEX}
+
 end
